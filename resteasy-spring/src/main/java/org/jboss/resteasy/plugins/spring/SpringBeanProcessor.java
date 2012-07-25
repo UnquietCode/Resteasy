@@ -22,6 +22,7 @@ import org.springframework.context.ApplicationEvent;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.SmartApplicationListener;
 import org.springframework.util.ClassUtils;
+import org.springframework.util.ReflectionUtils;
 
 import javax.ws.rs.ext.MessageBodyReader;
 import javax.ws.rs.ext.MessageBodyWriter;
@@ -396,7 +397,7 @@ public class SpringBeanProcessor implements BeanFactoryPostProcessor, SmartAppli
             }
          }
 
-         for (Method method : getBeanClass(factoryClassName).getMethods())
+         for (Method method : ReflectionUtils.getAllDeclaredMethods(getBeanClass(factoryClassName)))
          {
             if (method.getName().equals(factoryMethodName))
             {
